@@ -36,7 +36,7 @@
 
 請透過左邊欄位手動輸入帳號密碼，右邊的第三方登入通常會阻擋「受自動控制的瀏覽器」，因此無法透過第三方登入 MSW 官網。
 
-![image](https://hackmd.io/_uploads/ry5OuC3Llx.png =50%x)
+![image](https://hackmd.io/_uploads/ry5OuC3Llx.png)
 ![image](https://hackmd.io/_uploads/BkR9_ChIxg.png)
 
 確認登入成功後，回到主程式點選「2.儲存Cookie並關閉」
