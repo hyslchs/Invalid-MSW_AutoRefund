@@ -76,10 +76,10 @@ def mark_orders(start_page, end_page, start_date, end_date, status_callback):
             except Exception as e:
                 status_callback(f"  -> ❌ 抓取時發生錯誤: {e}")
 
-        with open("order_id.txt", "w", encoding="utf-8") as f:
+        with open("buyer's_order_id.txt", "w", encoding="utf-8") as f:
             for num in order_numbers:
                 f.write(num + "\n")
-        status_callback(f"✅ 特定買家訂單已全部寫入 order_id.txt (共 {len(order_numbers)} 筆)")
+        status_callback(f"✅ 特定買家訂單已全部寫入 buyer's_order_id.txt (共 {len(order_numbers)} 筆)")
 
         # --- 3. 抓取指定頁數範圍內的所有訂單編號 ---
         status_callback(f"\n--- 正在抓取第 {start_page} 到 {end_page} 頁的所有訂單 ---")
@@ -137,7 +137,7 @@ def mark_orders(start_page, end_page, start_date, end_date, status_callback):
 
         # --- 4. 比對並標記訂單 ---
         status_callback("\n--- 正在進行訂單比對與標記 ---")
-        with open("order_id.txt", "r", encoding="utf-8") as f:
+        with open("buyer's_order_id.txt", "r", encoding="utf-8") as f:
             target_ids = set(line.strip() for line in f if line.strip())
 
         marked_count = 0
