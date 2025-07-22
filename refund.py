@@ -112,12 +112,16 @@ def login_with_cookies(driver):
 def get_order_ids_from_file(file_path='marked_order_id.txt'):
     """
     從指定的檔案中讀取並解析需要退款的訂單 ID。
-    僅選取未以 '※' 開頭的行（表示要退款的訂單）。
+    僅選取未以 '※' 或 '--' 開頭的行（表示要退款的訂單）。
     """
     logger.info(f"正在從 {file_path} 讀取待退款的訂單編號...")
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
-            order_ids = [line.strip() for line in f if not line.strip().startswith('※')]
+            order_ids = [
+                line.strip()
+                for line in f
+                if line.strip() and not line.strip().startswith('※') and not line.strip().startswith('--')
+            ]
         return order_ids
     except FileNotFoundError:
         logger.error(f"找不到訂單檔案: {file_path}！")
@@ -160,6 +164,19 @@ def process_single_order(driver, order_id, status_callback, index, total):
         refund_button.click()
         logger.info(f"  - 已點擊訂單 {order_id} 的『退款』按鈕。")
         status_callback("    ✅ 已點擊『退款』按鈕")
+
+        # 檢查是否出現錯誤彈窗（例如『失敗』）
+        try:
+            error_modal = WebDriverWait(driver, 3).until(
+                EC.visibility_of_element_located((By.CLASS_NAME, "modal-header"))
+            )
+            if error_modal.text.strip() == "失敗":
+                error_msg = f"    ⚠️ 訂單 {order_id} 無法退款（彈出『失敗』視窗）"
+                logger.warning(error_msg)
+                status_callback(error_msg)
+                return  # 不再進行確認按鈕流程
+        except TimeoutException:
+            pass  # 沒出現視窗就繼續往下執行
 
         # 3. 在彈出視窗中點擊「確認」按鈕
         confirm_button = WebDriverWait(driver, 10).until(
