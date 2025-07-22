@@ -11,8 +11,8 @@ from refund import process_refunds
 class RefundApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("自動退款程式")
-        self.geometry("700x600")
+        self.title("MSW Auto Refund")
+        self.geometry("700x1000")
 
         # 初始化 Cookie 管理器
         self.cookie_manager = CookieManager(self.update_status)
@@ -31,7 +31,7 @@ class RefundApp(tk.Tk):
         main_frame.pack(expand=True, fill=tk.BOTH)
 
         # --- 標題 ---
-        header_label = ttk.Label(main_frame, text="MSW_Auto_Refund", style='Header.TLabel')
+        header_label = ttk.Label(main_frame, text="MSW Auto Refund", style='Header.TLabel')
         header_label.pack(pady=(0, 20))
 
         # --- 功能區塊 ---
