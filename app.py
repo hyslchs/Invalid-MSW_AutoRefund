@@ -31,7 +31,7 @@ class RefundApp(tk.Tk):
         main_frame.pack(expand=True, fill=tk.BOTH)
 
         # --- 標題 ---
-        header_label = ttk.Label(main_frame, text="楓之谷世界自動退款工具", style='Header.TLabel')
+        header_label = ttk.Label(main_frame, text="MSW_Auto_Refund", style='Header.TLabel')
         header_label.pack(pady=(0, 20))
 
         # --- 功能區塊 ---
