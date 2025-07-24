@@ -1,5 +1,6 @@
+# 7/24 MSW 平台更新，現台港澳服已無法主動退款，此腳本已失效
 # MSW 自動退款操作手冊 
-(最後更新 2025/07/22)
+(最後更新 2025/07/24)
 
 原始碼：https://github.com/hyslchs/MSW_AutoRufund?tab=readme-ov-file
 
